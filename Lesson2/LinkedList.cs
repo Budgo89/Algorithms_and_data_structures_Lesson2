@@ -137,7 +137,17 @@ namespace Lesson2
                 Console.WriteLine(current.Value);
                 current = current.NextNode;
             }
-
+        }
+        public int[] mass()
+        {
+            Node current = _srartNode;
+            int[] mass = new int[_count];
+            for (int i = 0; i < _count; i++)
+            {
+                mass[i] = current.Value;
+                current = current.NextNode;
+            }
+            return mass;
         }
     }
 }

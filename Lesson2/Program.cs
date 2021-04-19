@@ -12,6 +12,175 @@ namespace Lesson2
             public Exception ExpectedException { get; set; }
         }
 
+        public class TestCaseLinkedList
+        {
+            public LinkedList LinkedListTest { get; set; }
+            public int Value { get; set; }
+            public int[] Expected { get; set; }
+            public int ExpectedSearch { get; set; }
+            public Exception ExpectedException { get; set; }
+        }
+        static bool MassTect (int[] a, int[] b)
+        {
+            bool flag = false;
+            if (a.Length == b.Length)
+            {
+                for (int i = 0; i < a.Length; i++)
+                {
+                    if (a[i] == b[i])
+                    {
+                        flag = true;
+                    }
+                    else return false;
+                }
+                return flag;
+            }
+            else return false;
+        }
+        static void TestLinkedListFindNode(TestCaseLinkedList testCaseLinkedList)
+        {
+            try
+            {
+                var a = testCaseLinkedList.LinkedListTest.FindNode(testCaseLinkedList.Value);
+                if (a.Value == testCaseLinkedList.ExpectedSearch)
+                {
+                    Console.WriteLine("VALID TEST");
+                }
+                else
+                {
+                    Console.WriteLine("INVALID TEST");
+                }
+            }
+            catch (Exception)
+            {
+                if (testCaseLinkedList.ExpectedException != null)
+                {
+
+                    Console.WriteLine("VALID TEST");
+                }
+                else
+                {
+                    Console.WriteLine("INVALID TEST");
+                }
+            }
+        }
+        static void TestLinkedList(TestCaseLinkedList testCaseLinkedList)
+        {
+            try
+            {
+                testCaseLinkedList.LinkedListTest.AddNode(testCaseLinkedList.Value);
+                var mass = testCaseLinkedList.LinkedListTest.mass();
+                
+                    if (MassTect(mass, testCaseLinkedList.Expected) == true)
+                    {
+                        Console.WriteLine("VALID TEST");
+                    }
+                    else
+                    {
+                        Console.WriteLine("INVALID TEST");
+                    }
+                
+            }
+            catch (Exception)
+            {
+                if (testCaseLinkedList.ExpectedException != null)
+                {
+                   
+                    Console.WriteLine("VALID TEST");
+                }
+                else
+                {
+                    Console.WriteLine("INVALID TEST");
+                }
+            }
+        }
+        static void TestLinkedListAddNodeAfter(TestCaseLinkedList testCaseLinkedList)
+        {
+            try
+            {
+                var a = testCaseLinkedList.LinkedListTest.FindNode(testCaseLinkedList.ExpectedSearch);
+                testCaseLinkedList.LinkedListTest.AddNodeAfter(a, testCaseLinkedList.Value);
+                var mass = testCaseLinkedList.LinkedListTest.mass();
+                if (MassTect(mass, testCaseLinkedList.Expected) == true)
+                {
+                    Console.WriteLine("VALID TEST");
+                }
+                else
+                {
+                    Console.WriteLine("INVALID TEST");
+                }
+            }
+            catch (Exception)
+            {
+                if (testCaseLinkedList.ExpectedException != null)
+                {
+
+                    Console.WriteLine("VALID TEST");
+                }
+                else
+                {
+                    Console.WriteLine("INVALID TEST");
+                }
+            }
+        }
+        static void TestLinkedListAddRemoveNodeInt(TestCaseLinkedList testCaseLinkedList)
+        {
+            try
+            {
+                testCaseLinkedList.LinkedListTest.RemoveNode(testCaseLinkedList.Value);
+                var mass = testCaseLinkedList.LinkedListTest.mass();
+                if (MassTect(mass, testCaseLinkedList.Expected) == true)
+                {
+                    Console.WriteLine("VALID TEST");
+                }
+                else
+                {
+                    Console.WriteLine("INVALID TEST");
+                }
+            }
+            catch (Exception)
+            {
+                if (testCaseLinkedList.ExpectedException != null)
+                {
+
+                    Console.WriteLine("VALID TEST");
+                }
+                else
+                {
+                    Console.WriteLine("INVALID TEST");
+                }
+            }
+        }
+        static void TestLinkedListAddRemoveNode(TestCaseLinkedList testCaseLinkedList)
+        {
+            try
+            {
+                var a = testCaseLinkedList.LinkedListTest.FindNode(testCaseLinkedList.ExpectedSearch);
+                testCaseLinkedList.LinkedListTest.RemoveNode(testCaseLinkedList.Value);
+                var mass = testCaseLinkedList.LinkedListTest.mass();
+                if (MassTect(mass, testCaseLinkedList.Expected) == true)
+                {
+                    Console.WriteLine("VALID TEST");
+                }
+                else
+                {
+                    Console.WriteLine("INVALID TEST");
+                }
+            }
+            catch (Exception)
+            {
+                if (testCaseLinkedList.ExpectedException != null)
+                {
+
+                    Console.WriteLine("VALID TEST");
+                }
+                else
+                {
+                    Console.WriteLine("INVALID TEST");
+                }
+            }
+        }
+
         static void TestBinarySearch(TestCase testCase)
         {
             try
@@ -67,36 +236,88 @@ namespace Lesson2
 
         static void Main(string[] args)
         {
-            //LinkedList ds = new LinkedList();
 
-            //ds.AddNode(10);
-            //ds.AddNode(55);
-            //ds.AddNode(68);
-            //ds.AddNode(75);
-            //ds.print();
-            //var a = ds.FindNode(55);
 
-            //ds.AddNodeAfter(a, 11);
-            //Console.WriteLine();
-            //ds.print();
-            //a = ds.FindNode(11);
-            //Console.WriteLine();
-            //Console.WriteLine(a.Value);
-            //Console.WriteLine();
-            //Console.WriteLine(ds.GetCount());
-            //Console.WriteLine();          
+            LinkedList ds = new LinkedList();
+            int[] masstest1 = new int[] { 10 };
+            TestCaseLinkedList test1 = new TestCaseLinkedList()
+            {
+                LinkedListTest = ds,
+                Value = 10,
+                Expected = masstest1,
+                ExpectedException = null,
+            };
+            TestLinkedList(test1);
 
-            //ds.RemoveNode(0);
-            //Console.WriteLine();
-            //ds.print();
+            int[] masstest2 = new int[] { 10, 55 };
+            TestCaseLinkedList test2 = new TestCaseLinkedList()
+            {
+                LinkedListTest = ds,
+                Value = 55,
+                Expected = masstest2,
+                ExpectedException = null,
+            };
+            TestLinkedList(test2);
 
-            //a = ds.FindNode(68);
-            //ds.RemoveNode(a);
-            //Console.WriteLine();
-            //ds.print();
-            //ds.RemoveNode(3);
-            //Console.WriteLine();
-            //ds.print();
+            int[] masstest3 = new int[] { 10, 55, 68 };
+            TestCaseLinkedList test3 = new TestCaseLinkedList()
+            {
+                LinkedListTest = ds,
+                Value = 68,
+                Expected = masstest3,
+                ExpectedException = null,
+            };
+            TestLinkedList(test3);
+
+            int[] masstest4 = new int[] { 10, 55, 68, 75 };
+            TestCaseLinkedList test4 = new TestCaseLinkedList()
+            {
+                LinkedListTest = ds,
+                Value = 75,
+                Expected = masstest4,
+                ExpectedException = null,
+            };
+            TestLinkedList(test4);
+           
+            TestCaseLinkedList test5 = new TestCaseLinkedList()
+            {
+                LinkedListTest = ds,
+                Value = 55,
+                ExpectedSearch = 55,
+                ExpectedException = null,
+            };
+            TestLinkedListFindNode(test5);
+            int[] masstest6 = new int[] { 10, 55, 11, 68, 75 };
+            TestCaseLinkedList test6 = new TestCaseLinkedList()
+            {
+                LinkedListTest = ds,
+                Value = 11,
+                Expected = masstest6,
+                ExpectedSearch = 55,
+                ExpectedException = null,
+            };
+            TestLinkedListAddNodeAfter(test6);
+            int[] masstest7 = new int[] { 55, 11, 68, 75 };
+            TestCaseLinkedList test7 = new TestCaseLinkedList()
+            {
+                LinkedListTest = ds,
+                Value = 0,
+                Expected = masstest7,
+                ExpectedSearch = 55,
+                ExpectedException = null,
+            };
+            TestLinkedListAddRemoveNodeInt(test7);
+
+            int[] masstest8 = new int[] { 55, 11, 75 };
+            TestCaseLinkedList test8 = new TestCaseLinkedList()
+            {
+                LinkedListTest = ds,
+                Value = 2,
+                Expected = masstest8,
+                ExpectedSearch = 55,
+                ExpectedException = null,
+            };
+            TestLinkedListAddRemoveNode(test8);
 
             int[] intArray = new int[] { 1, 6, 77, 123, 444, 555, 660 };
             var testCase1 = new TestCase()
